@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Node is a single element of a linked list.
 # It holds its own value and a reference to the next node.
 class Node
@@ -31,8 +33,10 @@ class LinkedList
   def remove_from_front
     return unless @head
 
+    data = @head
     @head = @head.next
     @tail = nil unless @head
+    data&.value
   end
 
   def add_to_back(value)
@@ -46,18 +50,21 @@ class LinkedList
     return unless @head
 
     if @head == @tail
+      data = @head
       @head = nil
       @tail = nil
-      return
+      return data&.value
     end
     curr = @head
     curr = curr.next while curr.next != @tail
+    data = curr.next
     curr.next = nil
     @tail = curr
+    data&.value
   end
 
   def add_at_index(index, value)
-    raise OutOfBoundsError if !index.is_a?(Integer) || index < 0
+    raise OutOfBoundsError if !index.is_a?(Integer) || index.negative?
 
     return add_to_front(value) if index.zero?
 
@@ -79,7 +86,8 @@ class LinkedList
   end
 
   def remove_at_index(index)
-    raise OutOfBoundsError if !index.is_a?(Integer) || index < 0
+    raise OutOfBoundsError if !index.is_a?(Integer) || index.negative?
+
     return remove_from_front if index.zero?
 
     curr = @head
@@ -89,12 +97,14 @@ class LinkedList
       curr = curr.next
     end
 
+    data = curr.next
     if curr.next.next
       curr.next = curr.next.next
     else
       @tail = curr
       @tail.next = nil
     end
+    data&.value
   end
 end
 
