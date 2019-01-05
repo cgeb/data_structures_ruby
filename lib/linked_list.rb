@@ -16,11 +16,22 @@ end
 # It holds a reference to the head (first Node in the list)
 # Tail holds the last Node (tail is usually optional)
 class LinkedList
+  include Enumerable
   attr_reader :head, :tail
 
   def initialize
     @head = nil
     @tail = nil
+  end
+
+  def contains?(query_value)
+    curr = @head
+    while curr
+      return true if curr.value == query_value
+
+      curr = curr.next
+    end
+    false
   end
 
   def add_to_front(value)
@@ -105,6 +116,14 @@ class LinkedList
       @tail.next = nil
     end
     data&.value
+  end
+
+  def each(&block)
+    curr = @head
+    while curr
+      block.call(curr)
+      curr = curr.next
+    end
   end
 end
 

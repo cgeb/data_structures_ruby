@@ -107,4 +107,21 @@ describe LinkedList do
     expect { ll.add_at_index("a", "a") }.to raise_error(OutOfBoundsError)
     expect { ll.add_at_index(10, "a") }.to raise_error(OutOfBoundsError)
   end
+
+  describe "contains?" do
+    before do
+      @ll = LinkedList.new
+      @ll.add_to_front("a")
+      @ll.add_to_front("b")
+      @ll.add_to_front("c")
+    end
+
+    it "will return true if contains specified value" do
+      expect(@ll.contains?("a")).to be true
+    end
+
+    it "will return false if does not contain specified value" do
+      expect(@ll.contains?("d")).to be false
+    end
+  end
 end
