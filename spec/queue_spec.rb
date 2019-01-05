@@ -4,21 +4,21 @@ require "queue"
 
 describe Queue do
   it "can peek at the front of the queue" do
-    s = Queue.new
-    s.add(1)
-    expect(s.peek).to eq(1)
+    q = Queue.new
+    q.add(1)
+    expect(q.peek).to eq(1)
   end
 
   it "can add to the queue" do
-    s = Queue.new
-    s.add(1)
-    expect(s.empty?).to be false
+    q = Queue.new
+    q.add(1)
+    expect(q.empty?).to be false
   end
 
   it "can remove from the queue" do
-    s = Queue.new
-    s.add(1)
-    expect(s.remove).to eq(1)
+    q = Queue.new
+    q.add(1)
+    expect(q.remove).to eq(1)
   end
 end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("linked_list", __dir__)
 
 # Queue is a FIFO data structure
